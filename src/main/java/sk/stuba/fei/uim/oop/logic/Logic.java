@@ -99,14 +99,14 @@ public class Logic extends UniversalAdapter {
     public void mousePressed(MouseEvent e) {
         if (this.getBoard().getActiveShape() != null)  {
             if (this.getActiveShape() instanceof Tree) {
-                Tree newTree = new Tree(e.getX(),e.getY(),this.getActiveColor());
+                Tree newTree = new Tree(e.getX()-25,e.getY()-25,this.getActiveColor());
                 this.getBoard().getShapes().add(newTree);
                 this.updateColor();
                 this.getBoard().revalidate();
                 this.getBoard().repaint();
             }
             if (this.getActiveShape() instanceof House) {
-                House newTree = new House(e.getX(),e.getY(),this.getActiveColor());
+                House newTree = new House(e.getX()-25,e.getY()-25,this.getActiveColor());
                 this.getBoard().getShapes().add(newTree);
                 this.updateColor();
                 this.getBoard().revalidate();
@@ -121,7 +121,7 @@ public class Logic extends UniversalAdapter {
                         if (shape instanceof House) {
                             this.setStartShape(new House());
                         }
-                        Road newRoad = new Road(e. getX(),e.getY());
+                        Road newRoad = new Road(shape.getX()+25,shape.getY()+25);
                         this.getBoard().setActiveShape(newRoad);
                     }
                 }
@@ -143,21 +143,25 @@ public class Logic extends UniversalAdapter {
     public void mouseReleased(MouseEvent e) {
         if (this.getBoard().getActiveShape() instanceof Road) {
             boolean result = false;
-            ((Road) this.getBoard().getActiveShape()).setEndX(e.getX());
-            ((Road) this.getBoard().getActiveShape()).setEndY(e.getY());
+
             for (MyShape shape : this.getBoard().getShapes()) {
                 if (shape.contains(e.getX(),e.getY())){
                     if (startShape instanceof Tree && shape instanceof House) {
+                        ((Road) this.getBoard().getActiveShape()).setEndX(shape.getX()+25);
+                        ((Road) this.getBoard().getActiveShape()).setEndY(shape.getY()+25);
                         result = true;
                         break;
                     }
                     if (startShape instanceof House && shape instanceof Tree) {
+                        ((Road) this.getBoard().getActiveShape()).setEndX(shape.getX()+25);
+                        ((Road) this.getBoard().getActiveShape()).setEndY(shape.getY()+25);
                         result = true;
                         break;
                     }
                 }
             }
             if (result) {
+
                 this.getBoard().getShapes().add(this.getBoard().getActiveShape());
             } else {
                 this.getBoard().setActiveShape(new Road());
@@ -171,12 +175,12 @@ public class Logic extends UniversalAdapter {
     public void mouseMoved(MouseEvent e) {
         if (this.activeShape instanceof Tree) {
             Color color = new Color(this.getActiveColor().getRGB(),true);
-            Tree tmpTree = new Tree(e.getX(),e.getY(),color);
+            Tree tmpTree = new Tree(e.getX()-25,e.getY()-25,color);
             this.getBoard().setActiveShape(tmpTree);
         }
         if (this.activeShape instanceof House) {
             Color color = new Color(this.getActiveColor().getRGB(),true);
-            House tmpHouse = new House(e.getX(),e.getY(),color);
+            House tmpHouse = new House(e.getX()-25,e.getY()-25,color);
             this.getBoard().setActiveShape(tmpHouse);
         }
         this.getBoard().revalidate();
