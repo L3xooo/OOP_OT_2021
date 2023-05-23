@@ -12,7 +12,7 @@ public class Game {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
 
-        Logic logic = new Logic(frame);
+        Logic logic = new Logic();
 
         JButton tree = new JButton("Tree");
         tree.addActionListener(logic);
@@ -29,6 +29,7 @@ public class Game {
         menu.add(road);
         menu.add(logic.getActiveStatusLabel());
 
+        frame.add(logic.getBoard());
         frame.add(menu,BorderLayout.SOUTH);
         frame.setVisible(true);
     }

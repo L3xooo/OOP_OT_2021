@@ -20,18 +20,15 @@ public class Logic extends UniversalAdapter {
     private static final String TREE_BUTTON_NAME = "Tree";
     private static final String HOUSE_BUTTON_NAME = "House";
     private static final String ROAD_BUTTON_NAME = "Road";
-    private JFrame frame;
     private Board board;
     private JLabel activeStatusLabel;
     private Color activeColor;
     private ArrayList<Color> colors;
     private MyShape activeShape;
     private MyShape startShape;
-    public Logic(JFrame frame) {
-        this.frame = frame;
+    public Logic() {
         initBoard();
         initColors();
-        frame.add(board);
         this.activeStatusLabel = new JLabel();
         this.activeStatusLabel.setOpaque(true);
         this.getActiveStatusLabel().setForeground(Color.white);
